@@ -50,6 +50,12 @@ const UserFormEditor = () => {
                     ...user, password: e.target.value
             }))} className="form-control" value={user.password}/><br/>
 
+            <label>Date Of Birth</label>
+            <input onChange={(e) =>
+                setUser(user => ({
+                    ...user, dateOfBirth: e.target.value
+                }))} className="form-control" value={user.dateOfBirth}/><br/>
+
             <button onClick={() => history.back()} className="btn btn-warning">Cancel</button>
             <button onClick={() => deleteUser(user.id)} className="btn btn-danger">Delete</button>
             <button onClick={() => updateUser(user.id, user)} className="btn btn-primary">Save</button>

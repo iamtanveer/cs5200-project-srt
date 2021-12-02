@@ -1,6 +1,10 @@
 package com.example.springtemplate.models;
 
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+
 import javax.persistence.*;
+import java.sql.*;
 
 @Entity
 @Table(name="users")
@@ -12,9 +16,15 @@ public class User {
     private String lastName;
     private String username;
     private String password;
-    private String dateOfBirth;
-    private String created;
-    private String updated;
+
+    @Column(name="date_of_birth")
+    private java.sql.Date dateOfBirth;
+
+    @CreationTimestamp
+    private java.sql.Timestamp created;
+
+    @UpdateTimestamp
+    private java.sql.Timestamp updated;
 
     public Integer getId() {
         return id;
@@ -56,31 +66,31 @@ public class User {
         this.password = password;
     }
 
-    public String getDateOfBirth() {
+    public java.sql.Date getDateOfBirth() {
         return dateOfBirth;
     }
 
-    public void setDateOfBirth(String dateOfBirth) {
+    public void setDateOfBirth(java.sql.Date dateOfBirth) {
         this.dateOfBirth = dateOfBirth;
     }
 
-    public String getCreated() {
+    public java.sql.Timestamp getCreated() {
         return created;
     }
 
-    public void setCreated(String created) {
+    public void setCreated(java.sql.Timestamp created) {
         this.created = created;
     }
 
-    public String getUpdated() {
+    public java.sql.Timestamp getUpdated() {
         return updated;
     }
 
-    public void setUpdated(String updated) {
+    public void setUpdated(java.sql.Timestamp updated) {
         this.updated = updated;
     }
 
-    public User(Integer id, String firstName, String lastName, String username, String password, String dateOfBirth, String created, String updated) {
+    public User(Integer id, String firstName, String lastName, String username, String password, java.sql.Date dateOfBirth, java.sql.Timestamp created, java.sql.Timestamp updated) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
