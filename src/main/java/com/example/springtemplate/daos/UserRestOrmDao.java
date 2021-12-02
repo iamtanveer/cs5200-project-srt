@@ -14,6 +14,7 @@ public class UserRestOrmDao {
 
     @PostMapping("/api/users")
     public User createUser(@RequestBody User user) {
+
         return userRepository.save(user);
     }
     
@@ -37,6 +38,9 @@ public class UserRestOrmDao {
         user.setLastName(userUpdates.getLastName());
         user.setUsername(userUpdates.getUsername());
         user.setPassword(userUpdates.getPassword());
+        user.setDateOfBirth(userUpdates.getDateOfBirth());
+        user.setCreated(userUpdates.getCreated());
+        user.setUpdated(userUpdates.getUpdated());
         return userRepository.save(user);
     }
     
