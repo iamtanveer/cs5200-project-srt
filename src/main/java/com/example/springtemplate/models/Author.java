@@ -7,6 +7,6 @@ import javax.persistence.Table;
 @Table(name="authors")
 public class Author extends User {
 
-    private Category interest;
+//    private Category interest;
 
 }
