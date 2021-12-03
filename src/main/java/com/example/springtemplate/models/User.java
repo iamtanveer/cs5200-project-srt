@@ -1,9 +1,13 @@
 package com.example.springtemplate.models;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
-@Entity
-@Table(name="users")
+@Entity(name="users")
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name="user_type",
+        discriminatorType = DiscriminatorType.INTEGER)
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -15,6 +19,20 @@ public class User {
     private String dateOfBirth;
     private String created;
     private String updated;
+
+    @OneToMany(mappedBy="to")
+    private List<Followers> followers;
+
+    public List<Followers> getFollowing() {
+        return following;
+    }
+
+    public void setFollowing(List<Followers> following) {
+        this.following = following;
+    }
+
+    @OneToMany(mappedBy="from")
+    private List<Followers> following;
 
     public Integer getId() {
         return id;
@@ -80,6 +98,14 @@ public class User {
         this.updated = updated;
     }
 
+    public List<Followers> getFollowers() {
+        return followers;
+    }
+
+    public void setFollowers(List<Followers> followers) {
+        this.followers = followers;
+    }
+
     public User(Integer id, String firstName, String lastName, String username, String password, String dateOfBirth, String created, String updated) {
         this.id = id;
         this.firstName = firstName;
@@ -89,6 +115,8 @@ public class User {
         this.dateOfBirth = dateOfBirth;
         this.created = created;
         this.updated = updated;
+        this.followers = new ArrayList<>();
+        this.following = new ArrayList<>();
     }
 
     public User(){

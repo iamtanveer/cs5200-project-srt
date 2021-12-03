@@ -9,19 +9,23 @@ import javax.persistence.Table;
 public class Category {
 
     @Id
-    private String category;
+    private Categories category;
 
-    public Category(String category) {
+    public Category(Categories category) {
         this.category = category;
     }
 
     public Category (){}
 
-    public String getCategory() {
+    public Categories getCategory() {
         return category;
     }
 
-    public void setCategory(String category) {
+    public void setCategory(Categories category) {
         this.category = category;
     }
+}
+
+enum Categories {
+    SPORTS, ENTERTAINMENT, EDUCATION, POLITICS;
 }

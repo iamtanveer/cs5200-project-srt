@@ -4,11 +4,12 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 
 
 @Entity
-@Table(name = "article")
+@Table(name = "articles")
 public class Article {
 
     @Id
@@ -53,7 +54,7 @@ public class Article {
 
         Article article = (Article) o;
 
-        return this.id == article.getId();
+        return Objects.equals(this.id, article.getId());
     }
     @Override
     public int hashCode() {

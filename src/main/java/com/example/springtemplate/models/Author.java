@@ -1,12 +1,10 @@
 package com.example.springtemplate.models;
 
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
-import javax.persistence.Table;
 
 @Entity
-@Table(name="authors")
+@DiscriminatorValue("1")
 public class Author extends User {
-
-    private Category interest;
-
+    private Categories interest;
 }
