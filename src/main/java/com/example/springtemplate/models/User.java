@@ -17,8 +17,8 @@ public class User {
     private String username;
     private String password;
 
-    @Column(name="date_of_birth")
-    private java.sql.Date dateOfBirth;
+    @Column(name="date_of_birth", columnDefinition = "DATE")
+    private String dateOfBirth;
 
     @CreationTimestamp
     private java.sql.Timestamp created;
@@ -66,11 +66,11 @@ public class User {
         this.password = password;
     }
 
-    public java.sql.Date getDateOfBirth() {
+    public String getDateOfBirth() {
         return dateOfBirth;
     }
 
-    public void setDateOfBirth(java.sql.Date dateOfBirth) {
+    public void setDateOfBirth(String dateOfBirth) {
         this.dateOfBirth = dateOfBirth;
     }
 
@@ -90,7 +90,7 @@ public class User {
         this.updated = updated;
     }
 
-    public User(Integer id, String firstName, String lastName, String username, String password, java.sql.Date dateOfBirth, java.sql.Timestamp created, java.sql.Timestamp updated) {
+    public User(Integer id, String firstName, String lastName, String username, String password, String dateOfBirth, java.sql.Timestamp created, java.sql.Timestamp updated) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
