@@ -4,46 +4,33 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.List;
 
 @Entity
 @Table(name="users")
 @Inheritance(strategy = InheritanceType.JOINED)
-public class User {
+public class User implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
-    private String firstName;
-    private String lastName;
-    private String username;
-    private String password;
+    protected Integer id;
+    protected String firstName;
+    protected String lastName;
+    protected String username;
+    protected String password;
 
     @Column(name="date_of_birth", columnDefinition = "DATE")
-    private String dateOfBirth;
+    protected String dateOfBirth;
 
     @CreationTimestamp
-    private java.sql.Timestamp created;
+    protected java.sql.Timestamp created;
 
     @UpdateTimestamp
-    private java.sql.Timestamp updated;
-
-    @OneToMany(mappedBy="to")
-    private List<Followers> followers;
+    protected java.sql.Timestamp updated;
 
     public User() {
 
     }
-
-    public List<Followers> getFollowing() {
-        return following;
-    }
-
-    public void setFollowing(List<Followers> following) {
-        this.following = following;
-    }
-
-    @OneToMany(mappedBy="from")
-    private List<Followers> following;
 
     public Integer getId() {
         return id;
@@ -109,15 +96,9 @@ public class User {
         this.updated = updated;
     }
 
-    public List<Followers> getFollowers() {
-        return followers;
-    }
-
-    public void setFollowers(List<Followers> followers) {
-        this.followers = followers;
-    }
-
-    public User(Integer id, String firstName, String lastName, String username, String password, String dateOfBirth, java.sql.Timestamp created, java.sql.Timestamp updated) {
+    public User(Integer id, String firstName, String lastName,
+                String username, String password, String dateOfBirth,
+                java.sql.Timestamp created, java.sql.Timestamp updated) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;

@@ -9,10 +9,10 @@ import java.util.List;
 
 public interface UserRestRepository
         extends CrudRepository<User, Integer> {
-    @Query(value = "SELECT * FROM users",
+    @Query(value = "SELECT *, 0 AS clazz_ FROM users",
             nativeQuery = true)
     public List<User> findAllUsers();
-    @Query(value = "SELECT * FROM users WHERE id=:userId",
+    @Query(value = "SELECT *, 0 AS clazz_ FROM users WHERE id=:userId",
             nativeQuery = true)
     public User findUserById(@Param("userId") Integer id);
 }

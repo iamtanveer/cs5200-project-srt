@@ -4,17 +4,24 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.google.gson.annotations.Expose;
 
 import javax.persistence.*;
+import java.sql.Timestamp;
 
 @Entity
-@Table(name="author")
+@Table(name="authors")
+@DiscriminatorValue("AUTHOR")
+@PrimaryKeyJoinColumn(name="user_id")
 public class Author extends User {
-
     @OneToOne()
     @JsonIgnore
     @Expose
     @Enumerated(EnumType.STRING)
     @JoinColumn(name = "interest", nullable = false)
     private Categories interest;
+
+    public Author(Integer id, String firstName, String lastName, String username, String password, String dateOfBirth, Timestamp created, Timestamp updated, Categories interest) {
+        super(id, firstName, lastName, username, password, dateOfBirth, created, updated);
+        this.interest = interest;
+    }
 
     public Categories getInterest() {
         return interest;
@@ -24,7 +31,5 @@ public class Author extends User {
         this.interest = interest;
     }
 
-    public Author(Categories interest) {
-        this.interest = interest;
-    }
+    public Author() { }
 }
