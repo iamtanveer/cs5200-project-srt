@@ -5,6 +5,7 @@ import com.google.gson.annotations.Expose;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
+import java.util.List;
 
 @Entity
 @Table(name="authors")
@@ -18,8 +19,8 @@ public class Author extends User {
     @JoinColumn(name = "interest", nullable = false)
     private Categories interest;
 
-    public Author(Integer id, String firstName, String lastName, String username, String password, String dateOfBirth, Timestamp created, Timestamp updated, Categories interest) {
-        super(id, firstName, lastName, username, password, dateOfBirth, created, updated);
+    public Author(Integer id, String firstName, String lastName, String username, String password, String dateOfBirth, Timestamp created, Timestamp updated, Categories interest, List<Follow> follows, List<Follow> following) {
+        super(id, firstName, lastName, username, password, dateOfBirth, created, updated, follows, following);
         this.interest = interest;
     }
 
