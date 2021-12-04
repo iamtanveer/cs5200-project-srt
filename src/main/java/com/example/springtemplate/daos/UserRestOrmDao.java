@@ -14,7 +14,6 @@ public class UserRestOrmDao {
 
     @PostMapping("/api/users")
     public User createUser(@RequestBody User user) {
-
         return userRepository.save(user);
     }
     
