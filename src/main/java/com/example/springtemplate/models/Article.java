@@ -15,16 +15,10 @@ public class Article {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    private String source_id;
-    private String source_name;
-    private String author;
-    private Integer authorId;
     private String title;
     @Lob
     @Column(length=50000)
     private String description;
-    private String imageUrl;
-    private String url;
     private String publishedDate;
     @Lob
     @Column(length=100000)
@@ -40,7 +34,7 @@ public class Article {
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JsonIgnore
-    private User createdUser;
+    private Author createdUser;
 
     @OneToMany(mappedBy = "article")
     @JsonIgnore
@@ -61,37 +55,12 @@ public class Article {
         return this.id.hashCode();
     }
 
-
     public Integer getId() {
         return id;
     }
 
     public void setId(Integer id) {
         this.id = id;
-    }
-
-    public String getSource_id() {
-        return source_id;
-    }
-
-    public void setSource_id(String source_id) {
-        this.source_id = source_id;
-    }
-
-    public String getSource_name() {
-        return source_name;
-    }
-
-    public void setSource_name(String source_name) {
-        this.source_name = source_name;
-    }
-
-    public String getAuthor() {
-        return author;
-    }
-
-    public void setAuthor(String author) {
-        this.author = author;
     }
 
     public String getTitle() {
@@ -108,22 +77,6 @@ public class Article {
 
     public void setDesc(String desc) {
         this.description = desc;
-    }
-
-    public String getUrl() {
-        return url;
-    }
-
-    public void setUrl(String url) {
-        this.url = url;
-    }
-
-    public String getImageUrl() {
-        return imageUrl;
-    }
-
-    public void setImageUrl(String imageUrl) {
-        this.imageUrl = imageUrl;
     }
 
     public String getPublishedDate() {
@@ -170,16 +123,8 @@ public class Article {
         return createdUser;
     }
 
-    public void setCreatedUser(User createdUser) {
+    public void setCreatedUser(Author createdUser) {
         this.createdUser = createdUser;
-    }
-
-    public Integer getAuthorId() {
-        return authorId;
-    }
-
-    public void setAuthorId(Integer authorId) {
-        this.authorId = authorId;
     }
 
     public void populate(){
