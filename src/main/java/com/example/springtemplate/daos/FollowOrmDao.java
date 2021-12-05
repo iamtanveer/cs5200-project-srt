@@ -33,7 +33,7 @@ public class FollowOrmDao {
         return followRepository.findFollowById(followId);
     }
 
-    @GetMapping("/api/follows/{followId}")
+    @PutMapping("/api/follows/{followId}")
     public void updateFollowsById(@PathVariable("followId") long followId, @RequestBody User fromUser, User toUser) {
         Follow f = followRepository.findFollowById(followId);
         f.setFrom(fromUser);

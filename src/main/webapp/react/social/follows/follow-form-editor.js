@@ -7,12 +7,12 @@ const FollowFormEditor = () => {
     const [follow, setFollow] = useState({})
     useEffect(() => {
         if(id !== "new"){
-            findFollowsByID(id)
+            findFollowsById(id)
         }
     }, []);
 
-    const updateFollow = (id, newFollow) => followService.updateFollow(id, newFollow)
-        .then(() => history.back())
+    // const updateFollow = (id, ) => followService.updateFollow(id, newFollow)
+    //     .then(() => history.back())
 
     const createFollow = (follow) => followService.createFollow(follow)
         .then(() => history.back())
@@ -49,4 +49,4 @@ const FollowFormEditor = () => {
     )
 }
 
-export default UserFormEditor
+export default FollowFormEditor

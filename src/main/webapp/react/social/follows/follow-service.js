@@ -22,20 +22,20 @@ export const createFollow = (follow) => fetch(FOLLOWS_URL, {
     }
 }).then(response => response.json())
 
-// TODO: update a follow by their ID
-export const updateFollow = (id, follow) => fetch(`${FOLLOWS_URL}/${id}`, {
-    method: "PUT",
-    body: JSON.stringify(follow),
-    headers: {
-        'content-type': 'application/json'
-    }
-}).then(response => response.json())
+// // TODO: update a follow by their ID
+// export const updateFollow = (id, follower, following) => fetch(`${FOLLOWS_URL}/${id}`, {
+//     method: "PUT",
+//     body: JSON.stringify({"from": follower, "to": following}),
+//     headers: {
+//         'content-type': 'application/json'
+//     }
+// }).then(response => response.json())
 
 // TODO: export all functions as the API to this service
 export default {
     findAllFollows,
     findFollowsByID,
     deleteFollow,
-    createFollow,
-    updateFollow
+    createFollow
+    // updateFollow
 }
