@@ -19,15 +19,13 @@ const FollowList = () => {
             <button onClick={() => history.push("/follows/new")}>Add Follow</button>
             <ul className="list-group">
                 {
-                    // follows.map(follow =>
-                    //     <li key={follow.id} className="list-group-item">
-                    //         {/*<Link to={`/follows/${follow.id}`}>*/}
-                    //         {/*    {follow.id},*/}
-                    //         {/*    {follow.from},*/}
-                    //         {/*    {follow.to}*/}
-                    //         {/*</Link>*/}
-                    //         <h1>{follow.id}</h1>
-                    //     </li>)
+                    follows.map(follow =>
+                        <li key={follow.id} className="list-group-item">
+                            <Link to={`/follows/${follow.id}`}>
+                                {follow.from.firstName} ->
+                                {follow.to.firstName}
+                            </Link>
+                        </li>)
                 }
             </ul>
         </div>

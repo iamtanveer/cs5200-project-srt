@@ -1,4 +1,5 @@
 import followService from "./follow-service"
+import {findUserById} from "../users/user-service";
 const {useParams, useHistory} = window.ReactRouterDOM;
 const {useState, useEffect} = React;
 
@@ -32,19 +33,24 @@ const FollowFormEditor = () => {
             <label>Follower</label>
             <input onChange={(e) =>
                 setFollow(follow => ({
-                    ...follow, from: e.target.value
+                    ...follow, from: e.target.value.id
                 }))} className="form-control" value={follow.from}/><br/>
 
             <label>Following</label>
             <input onChange={(e) =>
                 setFollow(follow => ({
-                    ...follow, to: e.target.value
+                    ...follow, to: e.target.value.id
                 }))} className="form-control" value={follow.to}/><br/>
 
             <button onClick={() => history.back()} className="btn btn-warning">Cancel</button>
             <button onClick={() => deleteFollow(follow.id)} className="btn btn-danger">Delete</button>
             {/*<button onClick={() => updateUser(user.id, user)} className="btn btn-primary">Save</button>*/}
-            <button onClick={() => createFollow(follow)} className="btn btn-success">Create</button>
+            <button onClick={() => {const from = findUserById(follow.from).then((res) => {
+                const to = findUserById(follow.to).then((r2) => {
+                    createFollow({"from": res, "to": r2})
+                })
+                }
+            )}} className="btn btn-success">Create</button>
         </div>
     )
 }

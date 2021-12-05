@@ -10,6 +10,14 @@ public class Follow {
     @GeneratedValue(strategy=GenerationType.AUTO)
     private long id;
 
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
     @ManyToOne
     @JoinColumn(name="from_user_fk")
     private User from;
@@ -36,7 +44,8 @@ public class Follow {
 
     public Follow() {};
 
-    public Follow(User from, User to) {
+    public Follow(Long id, User from, User to) {
+        this.id = id;
         this.from = from;
         this.to = to;
     }

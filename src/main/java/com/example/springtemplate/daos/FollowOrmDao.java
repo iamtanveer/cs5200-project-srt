@@ -3,6 +3,7 @@ package com.example.springtemplate.daos;
 import com.example.springtemplate.models.Follow;
 import com.example.springtemplate.models.User;
 import com.example.springtemplate.repositories.FollowRepository;
+import com.example.springtemplate.repositories.UserRestRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,8 +15,14 @@ public class FollowOrmDao {
     @Autowired
     FollowRepository followRepository;
 
+    @Autowired
+    UserRestRepository userRestRepository;
+
     @PostMapping("/api/follows")
-    public Follow createFollow(@RequestBody Follow relation) {
+    public Follow createFollow(@RequestBody Follow relation ) {
+//        User follower = userRestRepository.findUserById(relation.getFrom().getId());
+//        User following = userRestRepository.findUserById(relation.getTo().getId());
+//        Follow newRelation = new Follow(follower, following);
         return followRepository.save(relation);
     }
 
