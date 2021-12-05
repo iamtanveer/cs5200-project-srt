@@ -1,14 +1,11 @@
 package com.example.springtemplate.daos;
 
 import com.example.springtemplate.models.Article;
-import com.example.springtemplate.models.Follow;
 import com.example.springtemplate.repositories.ArticleRepository;
-import com.example.springtemplate.repositories.FollowRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-
 
 @RestController
 @CrossOrigin(origins = "*")
@@ -27,11 +24,25 @@ public class ArticleOrmDao {
     }
 
     @GetMapping("/api/articles/{articleId}")
-    public List<Article> findArticleById(@PathVariable("articleId") Integer articleId) {
+    public Article findArticleById(@PathVariable("articleId") Integer articleId) {
         return articleRepository.findArticleById(articleId);
     }
 
+    @PutMapping("/api/articles/{articleId}")
+    public Article updateArticle(@PathVariable("articleId") Integer id, @RequestBody Article articleUpdates) {
+        Article article = articleRepository.findArticleById(id);
+        article.setAuthor(articleUpdates.getAuthor());
+        article.setCategory(articleUpdates.getCategory());
+        article.setContent(articleUpdates.getContent());
+        article.setTitle(articleUpdates.getTitle());
+        return articleRepository.save(article);
+    }
 
+    @DeleteMapping("/api/articles/{articleId}")
+    public void deleteArticle(@PathVariable("articleId") Integer id) {
+        articleRepository.deleteById(id);
+    }
+}
 //
 //    @GetMapping("/api/follows/following/{userId}")
 //    public List<Follow> findAllFollowsUser(
@@ -52,27 +63,3 @@ public class ArticleOrmDao {
 //            @PathVariable("userId") Integer userId1, @PathVariable("userId") Integer userId2) {
 //        followRepository.deleteRelation(userId1, userId2);
 //    }
-}
-
-
-//    @PutMapping("/api/users/{userId}")
-//    public User updateUser(
-//            @PathVariable("userId") Integer id,
-//            @RequestBody User userUpdates) {
-//        User user = userRepository.findUserById(id);
-//        user.setFirstName(userUpdates.getFirstName());
-//        user.setLastName(userUpdates.getLastName());
-//        user.setUsername(userUpdates.getUsername());
-//        user.setPassword(userUpdates.getPassword());
-//        user.setDateOfBirth(userUpdates.getDateOfBirth());
-//        user.setCreated(userUpdates.getCreated());
-//        user.setUpdated(userUpdates.getUpdated());
-//        return userRepository.save(user);
-//    }
-//
-//    @DeleteMapping("/api/users/{userId}")
-//    public void deleteUser(
-//            @PathVariable("userId") Integer id) {
-//        userRepository.deleteById(id);
-//    }
-//}
