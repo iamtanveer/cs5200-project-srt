@@ -8,13 +8,13 @@ public class Follow {
 
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
-    private long id;
+    private Integer id;
 
-    public long getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -44,7 +44,7 @@ public class Follow {
 
     public Follow() {};
 
-    public Follow(Long id, User from, User to) {
+    public Follow(Integer id, User from, User to) {
         this.id = id;
         this.from = from;
         this.to = to;

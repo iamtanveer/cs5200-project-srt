@@ -33,13 +33,13 @@ const FollowFormEditor = () => {
             <label>Follower</label>
             <input onChange={(e) =>
                 setFollow(follow => ({
-                    ...follow, from: e.target.value.id
+                    ...follow, from: e.target.value
                 }))} className="form-control" value={follow.from}/><br/>
 
             <label>Following</label>
             <input onChange={(e) =>
                 setFollow(follow => ({
-                    ...follow, to: e.target.value.id
+                    ...follow, to: e.target.value
                 }))} className="form-control" value={follow.to}/><br/>
 
             <button onClick={() => history.back()} className="btn btn-warning">Cancel</button>

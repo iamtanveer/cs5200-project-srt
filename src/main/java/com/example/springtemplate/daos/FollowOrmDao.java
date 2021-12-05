@@ -36,12 +36,12 @@ public class FollowOrmDao {
     }
 
     @GetMapping("/api/follows/{followId}")
-    public Follow findFollowById (@PathVariable("followId") long followId) {
+    public Follow findFollowById (@PathVariable("followId") Integer followId) {
         return followRepository.findFollowById(followId);
     }
 
     @PutMapping("/api/follows/{followId}")
-    public void updateFollowsById(@PathVariable("followId") long followId, @RequestBody User fromUser, User toUser) {
+    public void updateFollowsById(@PathVariable("followId") Integer followId, @RequestBody User fromUser, User toUser) {
         Follow f = followRepository.findFollowById(followId);
         f.setFrom(fromUser);
         f.setTo(toUser);
@@ -62,10 +62,9 @@ public class FollowOrmDao {
 //        return followRepository.findAllRelationsByFollowersId(userId);
 //    }
 
-    @DeleteMapping("/api/follows/{userId1}/{userId2}")
-    public void deleteRelation(
-            @PathVariable("userId") Integer userId1, @PathVariable("userId") Integer userId2) {
-        followRepository.deleteRelation(userId1, userId2);
+    @DeleteMapping("/api/follows/{followId}")
+    public void deleteFollowsById(@PathVariable("followId") Integer followId) {
+        followRepository.deleteById(followId);
     }
 }
 
