@@ -7,8 +7,16 @@ import javax.persistence.*;
 public class Follow {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy=GenerationType.AUTO)
     private long id;
+
+    @ManyToOne
+    @JoinColumn(name="from_user_fk")
+    private User from;
+
+    @ManyToOne
+    @JoinColumn(name="to_user_fk")
+    private User to;
 
     public User getFrom() {
         return from;
@@ -26,15 +34,7 @@ public class Follow {
         this.to = to;
     }
 
-    @ManyToOne
-    @JoinColumn(name="from_user")
-    private User from;
-
-    @ManyToOne
-    @JoinColumn(name="to_user")
-    private User to;
-
-    public Follow() {}
+    public Follow() {};
 
     public Follow(User from, User to) {
         this.from = from;
