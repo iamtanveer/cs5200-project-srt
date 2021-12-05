@@ -1,6 +1,7 @@
 package com.example.springtemplate.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.hibernate.annotations.Cascade;
 
 import javax.persistence.*;
 import java.util.List;
@@ -13,12 +14,9 @@ import java.util.Set;
 public class Article {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
     private String title;
-    @Lob
-    @Column(length=50000)
-    private String description;
     private String publishedDate;
     @Lob
     @Column(length=100000)
@@ -32,8 +30,9 @@ public class Article {
     @JsonIgnore
     private Set<User> likedUsers;
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JsonIgnore
+    @ManyToOne
+    @Cascade(value={org.hibernate.annotations.CascadeType.MERGE})
+    @JoinColumn(name="created_user")
     private Author createdUser;
 
     @OneToMany(mappedBy = "article")
@@ -69,14 +68,6 @@ public class Article {
 
     public void setTitle(String title) {
         this.title = title;
-    }
-
-    public String getDesc() {
-        return description;
-    }
-
-    public void setDesc(String desc) {
-        this.description = desc;
     }
 
     public String getPublishedDate() {
@@ -119,7 +110,7 @@ public class Article {
         this.comments = comments;
     }
 
-    public User getCreatedUser() {
+    public Author getCreatedUser() {
         return createdUser;
     }
 
@@ -131,5 +122,27 @@ public class Article {
         this.getCreatedUser();
         this.getLikedUsers();
         this.getComments();
+    }
+
+    public Article(Author createdUser) {
+        this.createdUser = createdUser;
+    }
+
+    public Article(String title, String publishedDate, String content, String category,
+                   Author createdUser) {
+        this.title = title;
+        this.publishedDate = publishedDate;
+        this.category = category;
+        this.content = content;
+        this.createdUser = createdUser;
+    }
+
+    public Article() {
+
+    }
+
+    @Override
+    public String toString() {
+        return title + " " + publishedDate + " " + category + " " + content + " " + createdUser;
     }
 }

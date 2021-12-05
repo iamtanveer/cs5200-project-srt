@@ -16,6 +16,7 @@ public class ArticleOrmDao {
 
     @PostMapping("/api/articles")
     public Article createArticle(@RequestBody Article article) {
+        System.out.println(article);
         return articleRepository.save(article);
     }
 
@@ -32,7 +33,7 @@ public class ArticleOrmDao {
     @PutMapping("/api/articles/{articleId}")
     public Article updateArticle(@PathVariable("articleId") Integer id, @RequestBody Article articleUpdates) {
         Article article = articleRepository.findArticleById(id);
-        article.setCreatedUser((Author) articleUpdates.getCreatedUser());
+        article.setCreatedUser(articleUpdates.getCreatedUser());
         article.setCategory(articleUpdates.getCategory());
         article.setContent(articleUpdates.getContent());
         article.setTitle(articleUpdates.getTitle());

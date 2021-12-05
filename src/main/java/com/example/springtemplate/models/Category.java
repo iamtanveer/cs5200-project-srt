@@ -3,10 +3,16 @@ package com.example.springtemplate.models;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Entity
-enum Categories {
-    SPORTS, ENTERTAINMENT, EDUCATION, POLITICS;
+@Table(name = "categories")
+public class Category {
+
+    public Category() {
+
+    }
+
     @Id
     @Column(name = "category", nullable = false)
     private String category;

@@ -12,23 +12,20 @@ import java.util.List;
 @DiscriminatorValue("AUTHOR")
 @PrimaryKeyJoinColumn(name="user_id")
 public class Author extends User {
-    @OneToOne()
-    @JsonIgnore
-    @Expose
-    @Enumerated(EnumType.STRING)
+    @ManyToOne
     @JoinColumn(name = "interest", nullable = false)
-    private Categories interest;
+    private Category interest;
 
-    public Author(Integer id, String firstName, String lastName, String username, String password, String dateOfBirth, Timestamp created, Timestamp updated, Categories interest) {
+    public Author(Integer id, String firstName, String lastName, String username, String password, String dateOfBirth, Timestamp created, Timestamp updated, Category interest) {
         super(id, firstName, lastName, username, password, dateOfBirth, created, updated);
         this.interest = interest;
     }
 
-    public Categories getInterest() {
+    public Category getInterest() {
         return interest;
     }
 
-    public void setInterest(Categories interest) {
+    public void setInterest(Category interest) {
         this.interest = interest;
     }
 
