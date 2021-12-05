@@ -14,7 +14,7 @@ public class FollowOrmDao {
     FollowRepository followRepository;
 
     @PostMapping("/api/follows")
-    public Follow createFollow(@RequestBody Follow relation){
+    public Follow createFollow(@RequestBody Follow relation) {
         return followRepository.save(relation);
     }
 
@@ -23,28 +23,28 @@ public class FollowOrmDao {
         return followRepository.findAllFollows();
     }
 
-    @GetMapping("/api/follows/{userId}")
+    @GetMapping("/api/follows/following/{userId}")
     public List<Follow> findAllFollowsUser(
-
+            @PathVariable("userId") Integer userId
     ) {
-        return followRepository.findAllFollows();
+        return followRepository.findAllRelationsByFollowsId(userId);
     }
 
+    @GetMapping("/api/follows/followers/{userId}")
+    public List<Follow> findAllFollowersUser(
+            @PathVariable("userId") Integer userId
+    ) {
+        return followRepository.findAllRelationsByFollowersId(userId);
+    }
 
+    @DeleteMapping("/api/follows/{userId1}/{userId2}")
+    public void deleteUser(
+            @PathVariable("userId") Integer userId1, @PathVariable("userId") Integer userId2) {
+        followRepository.deleteRelation(userId1, userId2);
+    }
 }
 
 
-    @GetMapping("/api/users")
-    public List<User> findAllUsers() {
-        return userRepository.findAllUsers();
-    }
-
-    @GetMapping("/api/users/{userId}")
-    public User findUserById(
-            @PathVariable("userId") Integer id) {
-        return userRepository.findUserById(id);
-    }
-//
 //    @PutMapping("/api/users/{userId}")
 //    public User updateUser(
 //            @PathVariable("userId") Integer id,
