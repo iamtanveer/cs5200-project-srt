@@ -23,7 +23,7 @@ public interface FollowRepository extends CrudRepository<Follow, Integer> {
             nativeQuery = true)
     public void deleteRelation(@Param("userId1") Integer userId1, @Param("userId2") Integer userId2);
 
-    @Query(value = "SELECT * FROM follows WHERE id=:id",
+    @Query(value = "SELECT * FROM follows WHERE id=:followId",
             nativeQuery = true)
-    public Follow findFollowById(@Param("followId") long id);
+    public Follow findFollowById(@Param("followId") long followId);
 }
