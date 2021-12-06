@@ -12,20 +12,20 @@ import java.util.List;
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
-    private String firstName;
-    private String lastName;
-    private String username;
-    private String password;
+    protected Integer id;
+    protected String firstName;
+    protected String lastName;
+    protected String username;
+    protected String password;
 
     @Column(name="date_of_birth", columnDefinition = "DATE")
-    private String dateOfBirth;
+    protected String dateOfBirth;
 
     @CreationTimestamp
-    private java.sql.Timestamp created;
+    protected java.sql.Timestamp created;
 
     @UpdateTimestamp
-    private java.sql.Timestamp updated;
+    protected java.sql.Timestamp updated;
 
     public User() {
 

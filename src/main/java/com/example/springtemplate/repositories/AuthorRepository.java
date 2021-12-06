@@ -8,7 +8,7 @@ import org.springframework.data.repository.query.Param;
 import java.util.List;
 public interface AuthorRepository
         extends CrudRepository<Author, Integer> {
-    @Query(value = "SELECT * FROM authors",
+    @Query(value = "SELECT * FROM authors, users where authors.user_id = users.id",
             nativeQuery = true)
     public List<Author> findAllAuthors();
     @Query(value = "SELECT * FROM authors WHERE user_id=:authorId",

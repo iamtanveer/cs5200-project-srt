@@ -26,8 +26,9 @@ public class AuthorOrmDao {
     }
 
     @PostMapping("/api/authors")
-    public Author createAuthor(@RequestBody Author author) {
-        return authorRepository.save(author);
+    public Author createAuthor(@RequestBody Author user) {
+        System.out.println(user.getFirstName() + "  " + user.getLastName());
+        return authorRepository.save(user);
     }
 
     @PutMapping("/api/authors/{authorId}")
