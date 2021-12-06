@@ -5,7 +5,14 @@ const {useState, useEffect} = React;
 
 const FollowFormEditor = () => {
     const {id} = useParams()
-    const [follow, setFollow] = useState({})
+    const [follow, setFollow] = useState({
+        "from": {
+            "id": ""
+        },
+        "to": {
+            "id": ""
+        }
+    })
     useEffect(() => {
         if(id !== "new"){
             findFollowsById(id)
@@ -34,13 +41,13 @@ const FollowFormEditor = () => {
             <input onChange={(e) =>
                 setFollow(follow => ({
                     ...follow, from: e.target.value
-                }))} className="form-control" value={follow.from}/><br/>
+                }))} className="form-control" value={follow.from.id}/><br/>
 
             <label>Following</label>
             <input onChange={(e) =>
                 setFollow(follow => ({
                     ...follow, to: e.target.value
-                }))} className="form-control" value={follow.to}/><br/>
+                }))} className="form-control" value={follow.to.id}/><br/>
 
             <button onClick={() => history.back()} className="btn btn-warning">Cancel</button>
             <button onClick={() => deleteFollow(follow.id)} className="btn btn-danger">Delete</button>

@@ -4,6 +4,8 @@ import FollowFormEditor from "./follows/follow-form-editor";
 import FollowList from "./follows/follow-list";
 import AuthorList from "./authors/author-list";
 import AuthorFormEditor from "./authors/author-form-editor";
+import ArticleList from "./articles/article-list";
+import ArticleFormEditor from "./articles/article-form-editor";
 
 const {HashRouter, Route} = window.ReactRouterDOM; 
 const App = () => {
@@ -27,6 +29,12 @@ const App = () => {
                 </Route>
                 <Route path="/authors/:id" exact={true}>
                     <AuthorFormEditor/>
+                </Route>
+                <Route path={["/articles", "/"]} exact={true}>
+                    <ArticleList/>
+                </Route>
+                <Route path="/articles/:id" exact={true}>
+                    <ArticleFormEditor/>
                 </Route>
             </HashRouter>
         </div>
