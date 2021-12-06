@@ -21,7 +21,10 @@ public class Article {
     @Lob
     @Column(length=100000)
     private String content;
-    private String category;
+
+    @ManyToOne
+    @JoinColumn(name = "category")
+    private Category category;
 
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "LIKES", joinColumns = @JoinColumn(name = "USER_ID"),
@@ -86,11 +89,11 @@ public class Article {
         this.content = content;
     }
 
-    public String getCategory() {
+    public Category getCategory() {
         return category;
     }
 
-    public void setCategory(String category) {
+    public void setCategory(Category category) {
         this.category = category;
     }
 
@@ -128,7 +131,7 @@ public class Article {
         this.createdUser = createdUser;
     }
 
-    public Article(String title, String publishedDate, String content, String category,
+    public Article(String title, String publishedDate, String content, Category category,
                    Author createdUser) {
         this.title = title;
         this.publishedDate = publishedDate;

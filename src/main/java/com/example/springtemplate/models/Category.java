@@ -13,6 +13,10 @@ public class Category {
 
     }
 
+    public Category(String category) {
+        this.category = category;
+    }
+
     @Id
     @Column(name = "category", nullable = false)
     private String category;
