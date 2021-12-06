@@ -37,11 +37,18 @@ public class AuthorOrmDao {
             @RequestBody Author authorUpdates) {
         Author author = authorRepository.findAuthorById(id);
         author.setInterest(authorUpdates.getInterest());
+        author.setFirstName(authorUpdates.getFirstName());
+        author.setLastName(authorUpdates.getLastName());
+        author.setPassword(authorUpdates.getPassword());
+        author.setUpdated(authorUpdates.getUpdated());
+        author.setCreated(authorUpdates.getCreated());
+        author.setDateOfBirth(authorUpdates.getDateOfBirth());
+        author.setUsername(authorUpdates.getUsername());
         return authorRepository.save(author);
     }
 
     @DeleteMapping("/api/authors/{authorId}")
-    public void deleteUser(
+    public void deleteAuthor(
             @PathVariable("authorId") Integer id) {
         authorRepository.deleteById(id);
     }
