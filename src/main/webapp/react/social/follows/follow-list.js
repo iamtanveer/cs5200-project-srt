@@ -22,7 +22,7 @@ const FollowList = () => {
                     follows.map(follow =>
                         <li key={follow.id} className="list-group-item">
                             <Link to={`/follows/${follow.id}`}>
-                                {follow.from.firstName} ->
+                                {follow.from.firstName} {" follows "}
                                 {follow.to.firstName}
                             </Link>
                         </li>)

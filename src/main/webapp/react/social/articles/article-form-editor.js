@@ -8,7 +8,7 @@ const ArticleFormEditor = () => {
     const {id} = useParams()
     const [article, setArticle] = useState({
         "createdUser": {
-            "firstName" : ""
+            "id" : ""
         },
         "category": {
             "category": ""
@@ -51,7 +51,7 @@ const ArticleFormEditor = () => {
             <label>Author Id</label>
             <input onChange={(e) => setArticle(article => ({
                 ...article, createdUser: e.target.value
-            }))} className="form-control" value={article.createdUser.firstName}/><br/>
+            }))} className="form-control" value={article.createdUser.id}/><br/>
 
             <label>Category</label>
             <input onChange={(e) => setArticle(article => ({
