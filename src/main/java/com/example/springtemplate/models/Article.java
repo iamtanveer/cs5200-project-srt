@@ -31,21 +31,14 @@ public class Article {
     @JoinColumn(name = "category")
     private Category category;
 
-//    @ManyToMany(fetch = FetchType.EAGER)
-//    @JoinTable(name = "LIKES", joinColumns = @JoinColumn(name = "USER_ID"),
-//            inverseJoinColumns =  @JoinColumn(name =
-//                    "ARTICLE_ID"))
-//    @JsonIgnore
-//    private Set<User> likedUsers;
-
     @ManyToOne
     @Cascade(value={org.hibernate.annotations.CascadeType.MERGE})
     @JoinColumn(name="created_user")
     private Author createdUser;
 
-//    @OneToMany(mappedBy = "article")
-//    @JsonIgnore
-//    private List<Comment> comments;
+    @OneToMany(mappedBy = "article")
+    @JsonIgnore
+    private List<Comment> comments;
 
     @Override
     public boolean equals(Object o) {
@@ -102,21 +95,13 @@ public class Article {
         this.category = category;
     }
 
-//    public Set<User> getLikedUsers() {
-//        return likedUsers;
-//    }
-//
-//    public void setLikedUsers(Set<User> likedUsers) {
-//        this.likedUsers = likedUsers;
-//    }
-//
-//    public List<Comment> getComments() {
-//        return comments;
-//    }
-//
-//    public void setComments(List<Comment> comments) {
-//        this.comments = comments;
-//    }
+    public List<Comment> getComments() {
+        return comments;
+    }
+
+    public void setComments(List<Comment> comments) {
+        this.comments = comments;
+    }
 
     public Author getCreatedUser() {
         return createdUser;
@@ -126,17 +111,12 @@ public class Article {
         this.createdUser = createdUser;
     }
 
-    public void populate(){
-        this.getCreatedUser();
-//        this.getLikedUsers();
-//        this.getComments();
-    }
-
     public Article(Author createdUser) {
         this.createdUser = createdUser;
     }
 
-    public Article(Integer id, String title, Timestamp publishedDate, String content, Category category, Author createdUser) {
+    public Article(Integer id, String title, Timestamp publishedDate, String content, Category category, Author createdUser,
+                   List<User> likedUsers) {
         this.id = id;
         this.title = title;
         this.publishedDate = publishedDate;

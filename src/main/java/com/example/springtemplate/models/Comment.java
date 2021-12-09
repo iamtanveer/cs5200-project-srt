@@ -2,17 +2,9 @@ package com.example.springtemplate.models;
 
 
 import com.google.gson.annotations.Expose;
+import org.hibernate.annotations.Cascade;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Lob;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import javax.persistence.*;
 
 @Entity
 @Table(name="comments")
@@ -24,13 +16,11 @@ public class Comment {
     private Integer id;
 
     @ManyToOne()
-    @JsonIgnore
-    @Expose
+    @JoinColumn(name="article_id")
     private Article article;
 
     @ManyToOne()
-    @JsonIgnore
-    @Expose
+    @JoinColumn(name="user_id")
     private User user;
 
     @Expose
@@ -39,9 +29,6 @@ public class Comment {
     private String comment;
 
     private String commentDate;
-
-    @Column(name="user_id", updatable=false, insertable=false)
-    private Integer userId;
 
     public Comment() {
 
@@ -85,13 +72,5 @@ public class Comment {
 
     public void setComment(String comment) {
         this.comment = comment;
-    }
-
-    public Integer getUserId() {
-        return userId;
-    }
-
-    public void setUserId(Integer userId) {
-        this.userId = userId;
     }
 }

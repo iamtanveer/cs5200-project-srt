@@ -1,7 +1,7 @@
 package com.example.springtemplate.daos;
 
 import com.example.springtemplate.models.Article;
-import com.example.springtemplate.models.Author;
+import com.example.springtemplate.models.User;
 import com.example.springtemplate.repositories.ArticleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -38,6 +38,12 @@ public class ArticleOrmDao {
         article.setContent(articleUpdates.getContent());
         article.setTitle(articleUpdates.getTitle());
         return articleRepository.save(article);
+    }
+
+    @PostMapping("/api/articles/like/{articleId}/{userId}")
+    public void likeArticle(@PathVariable("articleId") Article articleId,
+                            @PathVariable("userId") User userId) {
+        articleRepository.createArticleLike(articleId.getId(), userId.getId());
     }
 
     @DeleteMapping("/api/articles/{articleId}")

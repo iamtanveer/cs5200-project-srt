@@ -15,4 +15,8 @@ public interface ArticleRepository extends CrudRepository<Article, Integer> {
     @Query(value = "SELECT * FROM articles WHERE id=:id",
             nativeQuery = true)
     public Article findArticleById(@Param("id") Integer id);
+
+    @Query(value = "insert into likes values(userId, articleId)",
+            nativeQuery = true)
+    public void createArticleLike(@Param("userId") Integer userId, @Param("articleId") Integer articleId);
 }
