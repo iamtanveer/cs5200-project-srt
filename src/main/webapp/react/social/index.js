@@ -6,6 +6,9 @@ import AuthorList from "./authors/author-list";
 import AuthorFormEditor from "./authors/author-form-editor";
 import ArticleList from "./articles/article-list";
 import ArticleFormEditor from "./articles/article-form-editor";
+import CommentList from "./comments/comment-list";
+import CommentFormEditor from "./comments/comment-form-editor";
+
 
 const {HashRouter, Route} = window.ReactRouterDOM; 
 const App = () => {
@@ -35,6 +38,12 @@ const App = () => {
                 </Route>
                 <Route path="/articles/:id" exact={true}>
                     <ArticleFormEditor/>
+                </Route>
+                <Route path={["/comments", "/"]} exact={true}>
+                    <CommentList/>
+                </Route>
+                <Route path="/comments/:id" exact={true}>
+                    <CommentFormEditor/>
                 </Route>
             </HashRouter>
         </div>

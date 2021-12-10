@@ -3,8 +3,10 @@ package com.example.springtemplate.models;
 
 import com.google.gson.annotations.Expose;
 import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
+import java.sql.Timestamp;
 
 @Entity
 @Table(name="comments")
@@ -28,7 +30,8 @@ public class Comment {
     @Column(length=50000)
     private String comment;
 
-    private String commentDate;
+    @CreationTimestamp
+    private java.sql.Timestamp commentDate;
 
     public Comment() {
 
@@ -58,11 +61,11 @@ public class Comment {
         this.user = user;
     }
 
-    public String getCommentDate() {
+    public java.sql.Timestamp getCommentDate() {
         return commentDate;
     }
 
-    public void setCommentDate(String commentDate) {
+    public void setCommentDate(java.sql.Timestamp commentDate) {
         this.commentDate = commentDate;
     }
 
@@ -72,5 +75,13 @@ public class Comment {
 
     public void setComment(String comment) {
         this.comment = comment;
+    }
+
+    public Comment(Integer id, Article article, User user, String comment, Timestamp commentDate) {
+        this.id = id;
+        this.article = article;
+        this.user = user;
+        this.comment = comment;
+        this.commentDate = commentDate;
     }
 }
