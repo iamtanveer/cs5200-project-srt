@@ -36,9 +36,21 @@ public class Article {
     @JoinColumn(name="created_user")
     private Author createdUser;
 
-    @OneToMany(mappedBy = "article")
+    @OneToMany(mappedBy = "article", cascade = CascadeType.REMOVE)
     @JsonIgnore
     private List<Comment> comments;
+
+    public List<Like> getLikes() {
+        return likes;
+    }
+
+    public void setLikes(List<Like> likes) {
+        this.likes = likes;
+    }
+
+    @OneToMany(mappedBy = "article", cascade = CascadeType.REMOVE)
+    @JsonIgnore
+    private List<Like> likes;
 
     @Override
     public boolean equals(Object o) {

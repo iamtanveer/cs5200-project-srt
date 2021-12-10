@@ -9,10 +9,8 @@ import org.springframework.data.repository.query.Param;
 import java.util.List;
 
 public interface CommentRepository extends CrudRepository<Comment, Integer> {
-    @Query(value = "select * from comments, users, articles where comments.user_id = users.id and " +
-            "users.id = articles.created_user", nativeQuery = true)
+    @Query(value = "select * from comments", nativeQuery = true)
     public List<Comment> findAllComments();
-    @Query(value = "select * from comments, users, articles where comments.user_id = users.id and " +
-            "users.id = articles.created_user and comments.id=:commentId", nativeQuery = true)
+    @Query(value = "select * from comments where comments.id=:commentId", nativeQuery = true)
     public Comment findCommentById(@Param("commentId") Integer commentId);
 }

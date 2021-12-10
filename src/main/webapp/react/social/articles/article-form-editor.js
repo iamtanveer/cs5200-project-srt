@@ -26,7 +26,7 @@ const ArticleFormEditor = () => {
     const createArticle = (article) => articleService.createArticle(article)
         .then(() => history.back())
 
-    const findArticleById = (id) => articleService.findArticlesById(id)
+    const findArticleById = (id) => articleService.findArticleById(id)
         .then(article => setArticle(article))
 
     const deleteArticle = (id) => articleService.deleteArticle(id)

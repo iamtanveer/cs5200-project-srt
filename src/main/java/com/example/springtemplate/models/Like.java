@@ -1,5 +1,8 @@
 package com.example.springtemplate.models;
 
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
 import javax.persistence.*;
 
 @Entity
@@ -18,7 +21,7 @@ public class Like {
         this.id = id;
     }
 
-    @ManyToOne()
+    @ManyToOne(cascade = CascadeType.REMOVE)
     @JoinColumn(name="article_id")
     private Article article;
 

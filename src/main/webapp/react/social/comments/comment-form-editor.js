@@ -1,5 +1,7 @@
 import commentService from "./comment-service"
 const {useParams, useHistory} = window.ReactRouterDOM;
+import userService from "./../users/user-service"
+import {findArticleById} from "../articles/article-service";
 const {useState, useEffect} = React;
 
 const CommentFormEditor = () => {
@@ -25,32 +27,39 @@ const CommentFormEditor = () => {
 
     return (
         <div>
-            <h2>Comment Editor</h2>
-            {/*<label>Id</label>*/}
-            {/*<input className="form-control" value={comment.id}/><br/>*/}
+            <h2>Comment Id</h2>
+            <label>Id</label>
+            <input className="form-control" value={comment.id}/><br/>
 
             <label>Comment content</label>
             <input onChange={(e) => setComment(comment => ({
                 ...comment, content: e.target.value
             }))} className="form-control" value={comment.content}/><br/>
 
-            {/*<label>Category</label>*/}
-            {/*<input onChange={(e) => setArticle(article => ({*/}
-            {/*    ...article, category: e.target.value*/}
-            {/*}))} className="form-control" value={article.category.category}/><br/>*/}
+            <label>Commented by User Id</label>
+            <input onChange={(e) => setComment(comment => ({
+                ...comment, user: e.target.value
+            }))} className="form-control" value={comment.user}/><br/>
+
+            <label>Commented on Article Id</label>
+            <input onChange={(e) => setComment(comment => ({
+                ...comment, article: e.target.value
+            }))} className="form-control" value={comment.article}/><br/>
 
             <button onClick={() => history.back()} className="btn btn-warning">Cancel</button>
             <button onClick={() => deleteComment(comment.id)} className="btn btn-danger">Delete</button>
             <button onClick={() => updateComment(comment.id, comment)} className="btn btn-primary">Save</button>
-            <button onClick={() => {const authorId = findAuthorById(article.createdUser).then((res) => {
-                    createArticle({
-                        "title": article.title,
-                        "content": article.content,
-                        "category": article.category,
-                        "createdUser": res
-                    })
-                }
-            )}} className="btn btn-success">Create</button>
+            <button onClick={() => {
+                const userId = userService.findUserById(comment.user)
+                    .then((user) => {
+                        const articleId = findArticleById(comment.article)
+                            .then((article) => {
+                                createComment({
+                                    "article": article, "user": user, "comment": comment.content
+                                })
+                            })
+                    }
+                    )}} className="btn btn-success">Create</button>
         </div>
     )
 }

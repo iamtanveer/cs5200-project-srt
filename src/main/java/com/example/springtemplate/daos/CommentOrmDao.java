@@ -28,7 +28,7 @@ public class CommentOrmDao {
     }
 
     @GetMapping("/api/comments/{commentId}")
-    public Comment findCommentById (@PathVariable("commentId") Integer commentId) {
+    public Comment findCommentById(@PathVariable("commentId") Integer commentId) {
         return commentRepository.findCommentById(commentId);
     }
 

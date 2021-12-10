@@ -17,6 +17,18 @@ public class Author extends User {
     @JoinColumn(name = "interest", nullable = false)
     private Category interest;
 
+    @OneToMany(mappedBy = "createdUser", cascade = CascadeType.REMOVE)
+    @JsonIgnore
+    private List<Article> articles;
+
+    public List<Article> getArticles() {
+        return articles;
+    }
+
+    public void setArticles(List<Article> articles) {
+        this.articles = articles;
+    }
+
     public Author(User user, Category interest) {
         super(user.getId(), user.getFirstName(), user.getLastName(), user.getUsername(), user.getPassword(), user.dateOfBirth,
                 user.getCreated(), user.getUpdated());

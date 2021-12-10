@@ -1,5 +1,6 @@
 package com.example.springtemplate.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
@@ -20,6 +21,12 @@ public class User {
 
     @Column(name="date_of_birth", columnDefinition = "DATE")
     protected String dateOfBirth;
+
+    @OneToMany(mappedBy = "from", cascade = CascadeType.REMOVE)
+    protected List<Follow> follows;
+
+    @OneToMany(mappedBy = "to", cascade = CascadeType.REMOVE)
+    protected List<Follow> followed;
 
     @CreationTimestamp
     protected java.sql.Timestamp created;

@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @CrossOrigin(origins = "*")
@@ -26,9 +27,22 @@ public class LikeOrmDao {
         return likeRepository.findAllLikes();
     }
 
-    @GetMapping("/api/likes/{articleId}")
+    @GetMapping("/api/likes/article/{articleId}")
     public List<Like> findAllLikes(@PathVariable("articleId") Integer articleId) {
         return likeRepository.findAllLikesOfArticle(articleId);
+    }
+
+    @GetMapping("/api/likes/{likeId}")
+    public Like findLikeByLikeId(@PathVariable("likeId") Integer likeId) {
+        return likeRepository.findLikeById(likeId);
+    }
+
+    @PutMapping("/api/likes/{likeId}")
+    public Like updateLike(@PathVariable("likeId") Integer likeId, @RequestBody Like updatedLike) {
+        Like original = likeRepository.findLikeById(likeId);
+        original.setUser(updatedLike.getUser());
+        likeRepository.save(original);
+        return original;
     }
 
     @DeleteMapping("/api/likes/{likeId}")
