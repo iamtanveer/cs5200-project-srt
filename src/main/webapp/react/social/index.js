@@ -8,6 +8,8 @@ import ArticleList from "./articles/article-list";
 import ArticleFormEditor from "./articles/article-form-editor";
 import CommentList from "./comments/comment-list";
 import CommentFormEditor from "./comments/comment-form-editor";
+import LikeList from "./likes/like-list";
+import LikeFormEditor from "./likes/like-form-editor";
 
 
 const {HashRouter, Route} = window.ReactRouterDOM; 
@@ -44,6 +46,12 @@ const App = () => {
                 </Route>
                 <Route path="/comments/:id" exact={true}>
                     <CommentFormEditor/>
+                </Route>
+                <Route path={["/likes", "/"]} exact={true}>
+                    <LikeList/>
+                </Route>
+                <Route path="/likes/:id" exact={true}>
+                    <LikeFormEditor/>
                 </Route>
             </HashRouter>
         </div>

@@ -6,7 +6,14 @@ const {useState, useEffect} = React;
 
 const CommentFormEditor = () => {
     const {id} = useParams()
-    const [comment, setComment] = useState({})
+    const [comment, setComment] = useState({
+        "user": {
+            "id": ""
+        },
+        "article" : {
+            "id": ""
+        }
+    })
     useEffect(() => {
         if (id !== "new") {
             findCommentById(id)
@@ -33,18 +40,18 @@ const CommentFormEditor = () => {
 
             <label>Comment content</label>
             <input onChange={(e) => setComment(comment => ({
-                ...comment, content: e.target.value
-            }))} className="form-control" value={comment.content}/><br/>
+                ...comment, comment: e.target.value
+            }))} className="form-control" value={comment.comment}/><br/>
 
             <label>Commented by User Id</label>
             <input onChange={(e) => setComment(comment => ({
                 ...comment, user: e.target.value
-            }))} className="form-control" value={comment.user}/><br/>
+            }))} className="form-control" value={comment.user.id}/><br/>
 
             <label>Commented on Article Id</label>
             <input onChange={(e) => setComment(comment => ({
                 ...comment, article: e.target.value
-            }))} className="form-control" value={comment.article}/><br/>
+            }))} className="form-control" value={comment.article.id}/><br/>
 
             <button onClick={() => history.back()} className="btn btn-warning">Cancel</button>
             <button onClick={() => deleteComment(comment.id)} className="btn btn-danger">Delete</button>
@@ -55,7 +62,7 @@ const CommentFormEditor = () => {
                         const articleId = findArticleById(comment.article)
                             .then((article) => {
                                 createComment({
-                                    "article": article, "user": user, "comment": comment.content
+                                    "article": article, "user": user, "comment": comment.comment
                                 })
                             })
                     }

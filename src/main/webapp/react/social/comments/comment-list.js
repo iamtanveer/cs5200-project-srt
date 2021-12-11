@@ -22,7 +22,7 @@ const CommentList = () => {
                     comments.map(comment =>
                         <li key={comment.id} className="list-group-item">
                             <Link to={`/comments/${comment.id}`}>
-                                {comment.id}
+                                {comment.id} {": "} {comment.comment}
                             </Link>
                         </li>)
                 }
