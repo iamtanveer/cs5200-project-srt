@@ -13,4 +13,8 @@ public interface CommentRepository extends CrudRepository<Comment, Integer> {
     public List<Comment> findAllComments();
     @Query(value = "select * from comments where comments.id=:commentId", nativeQuery = true)
     public Comment findCommentById(@Param("commentId") Integer commentId);
+    @Query(value = "select * from comments where comments.user_id=:userId", nativeQuery = true)
+    public List<Comment> findCommentsByUser(@Param("userId") Integer userId);
+    @Query(value = "select * from comments where comments.article_id=:articleId", nativeQuery = true)
+    public List<Comment> findCommentsOfArticle(@Param("articleId") Integer articleId);
 }

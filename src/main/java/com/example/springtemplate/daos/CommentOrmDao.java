@@ -32,6 +32,16 @@ public class CommentOrmDao {
         return commentRepository.findCommentById(commentId);
     }
 
+    @GetMapping("/api/comments/user/{userId}")
+    public List<Comment> findCommentsByUser(@PathVariable("userId") Integer userId) {
+        return commentRepository.findCommentsByUser(userId);
+    }
+
+    @GetMapping("/api/comments/article/{articleId}")
+    public List<Comment> findCommentsOfArticle(@PathVariable("articleId") Integer articleId) {
+        return commentRepository.findCommentsOfArticle(articleId);
+    }
+
     @PutMapping("/api/comments/{commentId}")
     public Comment updateCommentById(@PathVariable("commentId") Integer commentId, @RequestBody Comment updatedComment) {
         Comment comment = commentRepository.findCommentById(commentId);

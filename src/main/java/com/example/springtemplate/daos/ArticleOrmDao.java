@@ -30,6 +30,11 @@ public class ArticleOrmDao {
         return articleRepository.findArticleById(articleId);
     }
 
+    @GetMapping("/api/articles/author/{authorId}")
+    public List<Article> getArticlesByAuthor(@PathVariable("authorId") Integer authorId) {
+        return articleRepository.getArticlesByAuthor(authorId);
+    }
+
     @PutMapping("/api/articles/{articleId}")
     public Article updateArticle(@PathVariable("articleId") Integer id, @RequestBody Article articleUpdates) {
         Article article = articleRepository.findArticleById(id);
@@ -40,34 +45,8 @@ public class ArticleOrmDao {
         return articleRepository.save(article);
     }
 
-    @PostMapping("/api/articles/like/{articleId}/{userId}")
-    public void likeArticle(@PathVariable("articleId") Article articleId,
-                            @PathVariable("userId") User userId) {
-        articleRepository.createArticleLike(articleId.getId(), userId.getId());
-    }
-
     @DeleteMapping("/api/articles/{articleId}")
     public void deleteArticle(@PathVariable("articleId") Integer id) {
         articleRepository.deleteById(id);
     }
 }
-//
-//    @GetMapping("/api/follows/following/{userId}")
-//    public List<Follow> findAllFollowsUser(
-//            @PathVariable("userId") Integer userId
-//    ) {
-//        return followRepository.findAllRelationsByFollowsId(userId);
-//    }
-//
-//    @GetMapping("/api/follows/followers/{userId}")
-//    public List<Follow> findAllFollowersUser(
-//            @PathVariable("userId") Integer userId
-//    ) {
-//        return followRepository.findAllRelationsByFollowersId(userId);
-//    }
-//
-//    @DeleteMapping("/api/follows/{userId1}/{userId2}")
-//    public void deleteUser(
-//            @PathVariable("userId") Integer userId1, @PathVariable("userId") Integer userId2) {
-//        followRepository.deleteRelation(userId1, userId2);
-//    }

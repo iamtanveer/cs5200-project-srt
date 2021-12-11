@@ -18,4 +18,7 @@ public interface LikeRepository extends CrudRepository<Like, Integer> {
 
     @Query(value = "SELECT * FROM likes where likes.id=:likeId", nativeQuery = true)
     public Like findLikeById(@Param("likeId") Integer likeId);
+
+    @Query(value = "SELECT * FROM likes where likes.user_id=:userId", nativeQuery = true)
+    public List<Like> findLikesByUser(@Param("userId") Integer userId);
 }

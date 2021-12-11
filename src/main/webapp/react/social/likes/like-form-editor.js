@@ -50,7 +50,18 @@ const LikeFormEditor = () => {
 
             <button onClick={() => history.back()} className="btn btn-warning">Cancel</button>
             <button onClick={() => deleteLike(like.id)} className="btn btn-danger">Delete</button>
-            <button onClick={() => updateLike(like.id, like)} className="btn btn-primary">Save</button>
+            <button onClick={() => {
+                const userId = userService.findUserById(like.user)
+                    .then((user) => {
+                            const articleId = findArticleById(like.article.id)
+                                .then((article) => {
+                                    updateLike(like.id,
+                                        {"article": article, "user": user})
+                                })
+                        }
+                    )
+            }} className="btn btn-primary">Save</button>
+
             <button onClick={() => {
                 const userId = userService.findUserById(like.user)
                     .then((user) => {
@@ -65,4 +76,4 @@ const LikeFormEditor = () => {
         </div>
     )
 }
-export default LikeFormEditor
+export default LikeFormEditor;

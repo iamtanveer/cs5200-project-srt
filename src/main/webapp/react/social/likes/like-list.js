@@ -22,7 +22,7 @@ const LikeList = () => {
                     likes.map(like =>
                         <li key={like.id} className="list-group-item">
                             <Link to={`/likes/${like.id}`}>
-                                {like.id}
+                                {"User "}{like.user.id} {" liked Article "} {like.article.title}
                             </Link>
                         </li>)
                 }

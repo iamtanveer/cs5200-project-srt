@@ -16,7 +16,7 @@ public interface ArticleRepository extends CrudRepository<Article, Integer> {
             nativeQuery = true)
     public Article findArticleById(@Param("id") Integer id);
 
-    @Query(value = "insert into likes values(userId, articleId)",
+    @Query(value = "select * from articles where articles.created_user=:authorId",
             nativeQuery = true)
-    public void createArticleLike(@Param("userId") Integer userId, @Param("articleId") Integer articleId);
+    public List<Article> getArticlesByAuthor(@Param("authorId") Integer authorId);
 }

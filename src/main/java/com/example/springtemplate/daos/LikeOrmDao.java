@@ -1,6 +1,7 @@
 package com.example.springtemplate.daos;
 
 import com.example.springtemplate.models.Article;
+import com.example.springtemplate.models.Comment;
 import com.example.springtemplate.models.Like;
 import com.example.springtemplate.models.User;
 import com.example.springtemplate.repositories.ArticleRepository;
@@ -28,8 +29,13 @@ public class LikeOrmDao {
     }
 
     @GetMapping("/api/likes/article/{articleId}")
-    public List<Like> findAllLikes(@PathVariable("articleId") Integer articleId) {
+    public List<Like> findAllLikesOfArticle(@PathVariable("articleId") Integer articleId) {
         return likeRepository.findAllLikesOfArticle(articleId);
+    }
+
+    @GetMapping("/api/likes/user/{userId}")
+    public List<Like> findLikesByUser(@PathVariable("userId") Integer userId) {
+        return likeRepository.findLikesByUser(userId);
     }
 
     @GetMapping("/api/likes/{likeId}")

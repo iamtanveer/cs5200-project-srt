@@ -59,6 +59,7 @@ const CommentFormEditor = () => {
             <button onClick={() => {
                 const userId = userService.findUserById(comment.user)
                     .then((user) => {
+                        console.log(user);
                         const articleId = findArticleById(comment.article)
                             .then((article) => {
                                 createComment({
