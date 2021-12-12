@@ -35,6 +35,10 @@ export const updateComment = (id, comment) => fetch(`${COMMENTS_URL}/${id}`, {
 export const findCommentsOnArticle = (id) => fetch(`${COMMENTS_URL}/article/${id}`)
     .then(response => response.json())
 
+//fetch comments by user
+export const findCommentsByUser = (id) => fetch(`${COMMENTS_URL}/user/${id}`)
+    .then(response => response.json())
+
 // export all functions as the API to this service
 export default {
     findAllComments,
@@ -42,5 +46,6 @@ export default {
     updateComment,
     deleteComment,
     createComment,
-    findCommentsOnArticle
+    findCommentsOnArticle,
+    findCommentsByUser
 }

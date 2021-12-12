@@ -31,11 +31,16 @@ export const updateLike = (id, like) => fetch(`${LIKES_URL}/${id}`, {
     }
 }).then(response => response.json())
 
+//fetch likes by user
+export const findLikesByUser = (id) => fetch(`${LIKES_URL}/user/${id}`)
+    .then(response => response.json())
+
 // export all functions as the API to this service
 export default {
     findAllLikes,
     findLikeById,
     updateLike,
     deleteLike,
-    createLike
+    createLike,
+    findLikesByUser
 }
