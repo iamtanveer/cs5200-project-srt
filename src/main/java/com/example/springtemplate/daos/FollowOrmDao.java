@@ -15,14 +15,8 @@ public class FollowOrmDao {
     @Autowired
     FollowRepository followRepository;
 
-    @Autowired
-    UserRestRepository userRestRepository;
-
     @PostMapping("/api/follows")
     public Follow createFollow(@RequestBody Follow relation ) {
-//        User follower = userRestRepository.findUserById(relation.getFrom().getId());
-//        User following = userRestRepository.findUserById(relation.getTo().getId());
-//        Follow newRelation = new Follow(follower, following);
         return followRepository.save(relation);
     }
 
@@ -36,7 +30,7 @@ public class FollowOrmDao {
     }
 
     @GetMapping("/api/follows/{followId}")
-    public Follow findFollowById (@PathVariable("followId") Integer followId) {
+    public Follow findFollowById(@PathVariable("followId") Integer followId) {
         return followRepository.findFollowById(followId);
     }
 
@@ -48,45 +42,22 @@ public class FollowOrmDao {
         followRepository.save(f);
     }
 
-//    @GetMapping("/api/follows/following/{userId}")
-//    public List<Follow> findAllFollowsUser(
-//            @PathVariable("userId") User userId
-//    ) {
-//        return followRepository.findAllRelationsByFollowsId(userId);
-//    }
-//
-//    @GetMapping("/api/follows/followers/{userId}")
-//    public List<Follow> findAllFollowersUser(
-//            @PathVariable("userId") Integer userId
-//    ) {
-//        return followRepository.findAllRelationsByFollowersId(userId);
-//    }
+    @GetMapping("/api/follows/following/{userId}")
+    public List<Follow> findAllUserFollowing(
+            @PathVariable("userId") Integer userId
+    ) {
+        return followRepository.findAllUserFollowing(userId);
+    }
+
+    @GetMapping("/api/follows/followers/{userId}")
+    public List<Follow> findAllUserFollowers(
+            @PathVariable("userId") Integer userId
+    ) {
+        return followRepository.findAllUserFollowers(userId);
+    }
 
     @DeleteMapping("/api/follows/{followId}")
     public void deleteFollowsById(@PathVariable("followId") Integer followId) {
         followRepository.deleteById(followId);
     }
 }
-
-
-//    @PutMapping("/api/users/{userId}")
-//    public User updateUser(
-//            @PathVariable("userId") Integer id,
-//            @RequestBody User userUpdates) {
-//        User user = userRepository.findUserById(id);
-//        user.setFirstName(userUpdates.getFirstName());
-//        user.setLastName(userUpdates.getLastName());
-//        user.setUsername(userUpdates.getUsername());
-//        user.setPassword(userUpdates.getPassword());
-//        user.setDateOfBirth(userUpdates.getDateOfBirth());
-//        user.setCreated(userUpdates.getCreated());
-//        user.setUpdated(userUpdates.getUpdated());
-//        return userRepository.save(user);
-//    }
-//
-//    @DeleteMapping("/api/users/{userId}")
-//    public void deleteUser(
-//            @PathVariable("userId") Integer id) {
-//        userRepository.deleteById(id);
-//    }
-//}

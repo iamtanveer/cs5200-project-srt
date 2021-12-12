@@ -31,11 +31,16 @@ export const updateArticle = (id, article) => fetch(`${ARTICLES_URL}/${id}`, {
     }
 }).then(response => response.json())
 
+// get all articles by author
+export const getArticlesByAuthor = (id) => fetch(`${ARTICLES_URL}/author/${id}`)
+    .then(response => response.json())
+
 // export all functions as the API to this service
 export default {
     findAllArticles,
     findArticleById,
     updateArticle,
     createArticle,
-    deleteArticle
+    deleteArticle,
+    getArticlesByAuthor
 }
