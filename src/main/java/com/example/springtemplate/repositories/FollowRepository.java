@@ -14,14 +14,10 @@ public interface FollowRepository extends CrudRepository<Follow, Integer> {
     public List<Follow> findAllFollows();
     @Query(value = "SELECT * FROM follows WHERE from_user_fk=:userId",
             nativeQuery = true)
-    public List<Follow> findAllRelationsByFollowsId(@Param("userId") Integer userId);
+    public List<Follow> findAllUserFollowing(@Param("userId") Integer userId);
     @Query(value = "SELECT * FROM follows WHERE to_user_fk=:userId",
             nativeQuery = true)
-    public List<Follow> findAllRelationsByFollowersId(@Param("userId") Integer userId);
-
-    @Query(value = "DELETE FROM follows WHERE from_user_fk=:userId1 AND to_user_fk=:userId2",
-            nativeQuery = true)
-    public void deleteRelation(@Param("userId1") Integer userId1, @Param("userId2") Integer userId2);
+    public List<Follow> findAllUserFollowers(@Param("userId") Integer userId);
 
     @Query(value = "SELECT * FROM follows WHERE id=:followId",
             nativeQuery = true)

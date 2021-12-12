@@ -1,5 +1,5 @@
 import authorService from "./author-service"
-const {useParams, useHistory} = window.ReactRouterDOM;
+const {Link, useParams, useHistory} = window.ReactRouterDOM;
 const {useState, useEffect} = React;
 
 const AuthorFormEditor = () => {
@@ -75,6 +75,8 @@ const AuthorFormEditor = () => {
                 "username": author.username, "password": author.password, "dateOfBirth": author.dateOfBirth,
                 "interest": {"category": author.interest}})
             }} className="btn btn-success">Create</button>
+            <br/>
+            <Link to={`/articles/author/${author.id}`}>Get Articles by this Author</Link>
         </div>
     )
 }
