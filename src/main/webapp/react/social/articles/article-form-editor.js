@@ -1,7 +1,7 @@
 import articleService from "./article-service"
 import {findAuthorById} from "../authors/author-service";
 import {createUser, findUserById} from "../users/user-service";
-const {useParams, useHistory} = window.ReactRouterDOM;
+const {Link, useParams, useHistory} = window.ReactRouterDOM;
 const {useState, useEffect} = React;
 
 const ArticleFormEditor = () => {
@@ -70,7 +70,10 @@ const ArticleFormEditor = () => {
                     })
                 }
             )}} className="btn btn-success">Create</button>
+            <br/>
+            <Link to={`/comments/article/${article.id}`}>Get Comments by Article</Link>
         </div>
     )
 }
+
 export default ArticleFormEditor
