@@ -2,17 +2,13 @@ package com.example.springtemplate.models;
 
 
 import com.google.gson.annotations.Expose;
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Lob;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import javax.persistence.*;
+import java.sql.Timestamp;
 
 @Entity
 @Table(name="comments")
@@ -24,13 +20,11 @@ public class Comment {
     private Integer id;
 
     @ManyToOne()
-    @JsonIgnore
-    @Expose
+    @JoinColumn(name="article_id")
     private Article article;
 
     @ManyToOne()
-    @JsonIgnore
-    @Expose
+    @JoinColumn(name="user_id")
     private User user;
 
     @Expose
@@ -38,10 +32,8 @@ public class Comment {
     @Column(length=50000)
     private String comment;
 
-    private String commentDate;
-
-    @Column(name="user_id", updatable=false, insertable=false)
-    private Integer userId;
+    @CreationTimestamp
+    private java.sql.Timestamp commentDate;
 
     public Comment() {
 
@@ -71,11 +63,11 @@ public class Comment {
         this.user = user;
     }
 
-    public String getCommentDate() {
+    public java.sql.Timestamp getCommentDate() {
         return commentDate;
     }
 
-    public void setCommentDate(String commentDate) {
+    public void setCommentDate(java.sql.Timestamp commentDate) {
         this.commentDate = commentDate;
     }
 
@@ -87,11 +79,11 @@ public class Comment {
         this.comment = comment;
     }
 
-    public Integer getUserId() {
-        return userId;
-    }
-
-    public void setUserId(Integer userId) {
-        this.userId = userId;
+    public Comment(Integer id, Article article, User user, String comment, Timestamp commentDate) {
+        this.id = id;
+        this.article = article;
+        this.user = user;
+        this.comment = comment;
+        this.commentDate = commentDate;
     }
 }

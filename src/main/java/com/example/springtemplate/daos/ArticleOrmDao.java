@@ -1,7 +1,7 @@
 package com.example.springtemplate.daos;
 
 import com.example.springtemplate.models.Article;
-import com.example.springtemplate.models.Author;
+import com.example.springtemplate.models.User;
 import com.example.springtemplate.repositories.ArticleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -30,6 +30,11 @@ public class ArticleOrmDao {
         return articleRepository.findArticleById(articleId);
     }
 
+    @GetMapping("/api/articles/author/{authorId}")
+    public List<Article> getArticlesByAuthor(@PathVariable("authorId") Integer authorId) {
+        return articleRepository.getArticlesByAuthor(authorId);
+    }
+
     @PutMapping("/api/articles/{articleId}")
     public Article updateArticle(@PathVariable("articleId") Integer id, @RequestBody Article articleUpdates) {
         Article article = articleRepository.findArticleById(id);
@@ -45,23 +50,3 @@ public class ArticleOrmDao {
         articleRepository.deleteById(id);
     }
 }
-//
-//    @GetMapping("/api/follows/following/{userId}")
-//    public List<Follow> findAllFollowsUser(
-//            @PathVariable("userId") Integer userId
-//    ) {
-//        return followRepository.findAllRelationsByFollowsId(userId);
-//    }
-//
-//    @GetMapping("/api/follows/followers/{userId}")
-//    public List<Follow> findAllFollowersUser(
-//            @PathVariable("userId") Integer userId
-//    ) {
-//        return followRepository.findAllRelationsByFollowersId(userId);
-//    }
-//
-//    @DeleteMapping("/api/follows/{userId1}/{userId2}")
-//    public void deleteUser(
-//            @PathVariable("userId") Integer userId1, @PathVariable("userId") Integer userId2) {
-//        followRepository.deleteRelation(userId1, userId2);
-//    }

@@ -15,4 +15,8 @@ public interface ArticleRepository extends CrudRepository<Article, Integer> {
     @Query(value = "SELECT * FROM articles WHERE id=:id",
             nativeQuery = true)
     public Article findArticleById(@Param("id") Integer id);
+
+    @Query(value = "select * from articles where articles.created_user=:authorId",
+            nativeQuery = true)
+    public List<Article> getArticlesByAuthor(@Param("authorId") Integer authorId);
 }

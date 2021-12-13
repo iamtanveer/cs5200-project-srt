@@ -5,7 +5,7 @@ export const findAllArticles = () => fetch(ARTICLES_URL)
     .then(response => response.json())
 
 // retrieve a single article by their ID
-export const findArticlesById = (id) => fetch(`${ARTICLES_URL}/${id}`)
+export const findArticleById = (id) => fetch(`${ARTICLES_URL}/${id}`)
     .then(response => response.json())
 
 // delete an article by their ID
@@ -31,11 +31,16 @@ export const updateArticle = (id, article) => fetch(`${ARTICLES_URL}/${id}`, {
     }
 }).then(response => response.json())
 
+// get all articles by author
+export const getArticlesByAuthor = (id) => fetch(`${ARTICLES_URL}/author/${id}`)
+    .then(response => response.json())
+
 // export all functions as the API to this service
 export default {
     findAllArticles,
-    findArticlesById,
+    findArticleById,
     updateArticle,
     createArticle,
-    deleteArticle
+    deleteArticle,
+    getArticlesByAuthor
 }
