@@ -1,19 +1,15 @@
 const FOLLOWS_URL = "http://localhost:8080/api/follows"
 
-// TODO: retrieve all follows from the server
 export const findAllFollows = () => fetch(FOLLOWS_URL)
     .then(response => response.json())
 
-// TODO: retrieve a single follow by their ID
 export const findFollowsByID = (id) => fetch(`${FOLLOWS_URL}/${id}`)
     .then(response => response.json())
 
-// TODO: delete a follow by their ID
 export const deleteFollow = (id) => fetch(`${FOLLOWS_URL}/${id}`, {
     method: "DELETE"
 });
 
-// TODO: create a new follow
 export const createFollow = (follow) => fetch(FOLLOWS_URL, {
     method: "POST",
     body: JSON.stringify(follow),
@@ -22,7 +18,14 @@ export const createFollow = (follow) => fetch(FOLLOWS_URL, {
     }
 }).then(response => response.json())
 
-// // TODO: update a follow by their ID
+export const findAllUserFollowing = (userId) => fetch(`${FOLLOWS_URL}/following/${userId}`)
+    .then(response => response.json())
+
+
+export const findAllUserFollowers = (userId) => fetch(`${FOLLOWS_URL}/followers/${userId}`)
+    .then(response => response.json())
+
+// Not implementing this because it does not make sense to update follow
 // export const updateFollow = (id, follower, following) => fetch(`${FOLLOWS_URL}/${id}`, {
 //     method: "PUT",
 //     body: JSON.stringify({"from": follower, "to": following}),
@@ -31,11 +34,12 @@ export const createFollow = (follow) => fetch(FOLLOWS_URL, {
 //     }
 // }).then(response => response.json())
 
-// TODO: export all functions as the API to this service
 export default {
     findAllFollows,
     findFollowsByID,
     deleteFollow,
-    createFollow
+    createFollow,
+    findAllUserFollowers,
+    findAllUserFollowing
     // updateFollow
 }

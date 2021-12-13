@@ -64,6 +64,10 @@ const UserFormEditor = () => {
             <Link to={`/comments/user/${user.id}`}>Get Comments by User</Link>
             <br/>
             <Link to={`/likes/user/${user.id}`}>Get Likes by User</Link>
+            <br/>
+            <Link to={`/follows/following/${user.id}`}>Get People followed by this user</Link>
+            <br/>
+            <Link to={`/follows/followers/${user.id}`}>Get People following this user</Link>
         </div>
     )
 }
