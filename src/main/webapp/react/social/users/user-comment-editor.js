@@ -29,6 +29,8 @@ const UserCommentEditor = () => {
                         </li>)
                 }
             </ul>
+            <br/>
+            <button onClick={() => history.back()} className="btn btn-warning">Go back</button>
         </div>
     )
 }

@@ -71,7 +71,9 @@ const ArticleFormEditor = () => {
                 }
             )}} className="btn btn-success">Create</button>
             <br/>
-            <Link to={`/comments/article/${article.id}`}>Get Comments by Article</Link>
+            <Link to={`/comments/article/${article.id}`}>Get Comments on Article</Link>
+            <br/>
+            <Link to={`/likes/article/${article.id}`}>Get Likes on Article</Link>
         </div>
     )
 }

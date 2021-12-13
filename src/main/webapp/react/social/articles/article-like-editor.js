@@ -3,22 +3,25 @@ import likeService from "./../likes/like-service"
 const { useState, useEffect } = React;
 const {Link, useHistory, useParams} = window.ReactRouterDOM;
 
-const UserLikeEditor = () => {
-    const {userId} = useParams()
+const ArticleLikeEditor = () => {
+    const {articleId} = useParams()
     const [likes, setLikes] = useState([])
     useEffect(() => {
-        findAllLikesByUser()
+        findAllLikesOnArticle()
     }, [])
 
-    const findAllLikesByUser = () =>
-        likeService.findLikesByUser(userId)
-            .then(findAllLikesByUser => setLikes(findAllLikesByUser))
+    const findAllLikesOnArticle = () => {
+        console.log(articleId);
+        likeService.findLikesOnArticle(articleId)
+            .then(findAllLikesOnArticle => setLikes(findAllLikesOnArticle))
+    }
+
 
     // const history = useHistory()
 
     return(
         <div>
-            <h2>Likes by User</h2>
+            <h2>Likes on Article</h2>
             <ul className="list-group">
                 {
                     likes.map(like =>
@@ -35,4 +38,4 @@ const UserLikeEditor = () => {
     )
 }
 
-export default UserLikeEditor;
+export default ArticleLikeEditor;

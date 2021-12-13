@@ -14,6 +14,7 @@ import ArticleCommentEditor from "./articles/article-comment-editor";
 import UserCommentEditor from "./users/user-comment-editor";
 import UserLikeEditor from "./users/user-like-editor";
 import AuthorArticleEditor from "./authors/author-article-editor";
+import ArticleLikeEditor from "./articles/article-like-editor";
 
 
 const {HashRouter, Route} = window.ReactRouterDOM; 
@@ -68,6 +69,9 @@ const App = () => {
                 </Route>
                 <Route path="/articles/author/:authorId" exact={true}>
                     <AuthorArticleEditor/>
+                </Route>
+                <Route path="/likes/article/:articleId" exact={true}>
+                    <ArticleLikeEditor/>
                 </Route>
             </HashRouter>
         </div>
