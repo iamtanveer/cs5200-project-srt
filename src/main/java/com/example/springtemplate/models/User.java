@@ -1,20 +1,42 @@
 package com.example.springtemplate.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name="users")
+@Inheritance(strategy = InheritanceType.JOINED)
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
-    private String firstName;
-    private String lastName;
-    private String username;
-    private String password;
-    private String dateOfBirth;
-    private String created;
-    private String updated;
+    protected Integer id;
+    protected String firstName;
+    protected String lastName;
+    protected String username;
+    protected String password;
+
+    @Column(name="date_of_birth", columnDefinition = "DATE")
+    protected String dateOfBirth;
+
+    @OneToMany(mappedBy = "from", cascade = CascadeType.REMOVE)
+    protected List<Follow> follows;
+
+    @OneToMany(mappedBy = "to", cascade = CascadeType.REMOVE)
+    protected List<Follow> followed;
+
+    @CreationTimestamp
+    protected java.sql.Timestamp created;
+
+    @UpdateTimestamp
+    protected java.sql.Timestamp updated;
+
+    public User() {
+
+    }
 
     public Integer getId() {
         return id;
@@ -64,23 +86,25 @@ public class User {
         this.dateOfBirth = dateOfBirth;
     }
 
-    public String getCreated() {
+    public java.sql.Timestamp getCreated() {
         return created;
     }
 
-    public void setCreated(String created) {
+    public void setCreated(java.sql.Timestamp created) {
         this.created = created;
     }
 
-    public String getUpdated() {
+    public java.sql.Timestamp getUpdated() {
         return updated;
     }
 
-    public void setUpdated(String updated) {
+    public void setUpdated(java.sql.Timestamp updated) {
         this.updated = updated;
     }
 
-    public User(Integer id, String firstName, String lastName, String username, String password, String dateOfBirth, String created, String updated) {
+    public User(Integer id, String firstName,
+                String lastName, String username, String password, String dateOfBirth,
+                java.sql.Timestamp created, java.sql.Timestamp updated) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -91,7 +115,8 @@ public class User {
         this.updated = updated;
     }
 
-    public User(){
-
+    @Override
+    public String toString() {
+        return this.username + "  " + this.firstName+"  " + this.lastName;
     }
 }

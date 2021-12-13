@@ -37,8 +37,9 @@ public class UserRestOrmDao {
         user.setLastName(userUpdates.getLastName());
         user.setUsername(userUpdates.getUsername());
         user.setPassword(userUpdates.getPassword());
-        user.setProfilePicture(userUpdates.getProfilePicture());
-        user.setHandle(userUpdates.getHandle());
+        user.setDateOfBirth(userUpdates.getDateOfBirth());
+        user.setCreated(userUpdates.getCreated());
+        user.setUpdated(userUpdates.getUpdated());
         return userRepository.save(user);
     }
     

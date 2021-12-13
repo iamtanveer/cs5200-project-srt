@@ -1,21 +1,22 @@
 package com.example.springtemplate.models;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
-@Table(name="categories")
+@Table(name = "categories")
 public class Category {
 
-    @Id
-    private String category;
+    public Category() {
+
+    }
 
     public Category(String category) {
         this.category = category;
     }
 
-    public Category (){}
+    @Id
+    @Column(name = "category", nullable = false)
+    private String category;
 
     public String getCategory() {
         return category;

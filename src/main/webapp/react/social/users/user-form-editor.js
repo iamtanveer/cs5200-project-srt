@@ -1,5 +1,5 @@
 import userService from "./user-service"
-const {useParams, useHistory} = window.ReactRouterDOM;
+const {Link, useParams, useHistory} = window.ReactRouterDOM;
 const {useState, useEffect} = React;
 
 const UserFormEditor = () => {
@@ -50,10 +50,24 @@ const UserFormEditor = () => {
                     ...user, password: e.target.value
             }))} className="form-control" value={user.password}/><br/>
 
+            <label>Date Of Birth</label>
+            <input onChange={(e) =>
+                setUser(user => ({
+                    ...user, dateOfBirth: e.target.value
+                }))} className="form-control" value={user.dateOfBirth}/><br/>
+
             <button onClick={() => history.back()} className="btn btn-warning">Cancel</button>
             <button onClick={() => deleteUser(user.id)} className="btn btn-danger">Delete</button>
             <button onClick={() => updateUser(user.id, user)} className="btn btn-primary">Save</button>
             <button onClick={() => createUser(user)} className="btn btn-success">Create</button>
+            <br/>
+            <Link to={`/comments/user/${user.id}`}>Get Comments by User</Link>
+            <br/>
+            <Link to={`/likes/user/${user.id}`}>Get Likes by User</Link>
+            <br/>
+            <Link to={`/follows/following/${user.id}`}>Get People followed by this user</Link>
+            <br/>
+            <Link to={`/follows/followers/${user.id}`}>Get People following this user</Link>
         </div>
     )
 }
