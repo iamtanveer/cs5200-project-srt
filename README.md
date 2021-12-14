@@ -1,3 +1,8 @@
+Team members: 
+1. Srikar Yagavandla
+2. Rithika Reddy Gosukonda
+3. Tanveer Singh
+
 Problem Statement:
 
 Provide a database centric application that allows bloggers and readers to interact with articles posted and created by authors. Users can interact with the application by posting comments and liking articles. Users can also follow their favourite authors and other users.
