@@ -1,5 +1,5 @@
 import commentService from "./comment-service"
-const {useParams, useHistory} = window.ReactRouterDOM;
+const {Link, useParams, useHistory} = window.ReactRouterDOM;
 import userService from "./../users/user-service"
 import {findArticleById} from "../articles/article-service";
 const {useState, useEffect} = React;
@@ -68,6 +68,10 @@ const CommentFormEditor = () => {
                             })
                     }
                     )}} className="btn btn-success">Create</button>
+            <br/>
+            <Link to={`/articles/${comment.article.id}`}>Get Article</Link>
+            <br/>
+            <Link to={`/users/${comment.user.id}`}>Get User</Link>
         </div>
     )
 }

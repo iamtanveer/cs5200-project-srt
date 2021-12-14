@@ -1,5 +1,5 @@
 import likeService from "./like-service"
-const {useParams, useHistory} = window.ReactRouterDOM;
+const {Link, useParams, useHistory} = window.ReactRouterDOM;
 import userService from "./../users/user-service"
 import {findArticleById} from "../articles/article-service";
 const {useState, useEffect} = React;
@@ -73,6 +73,10 @@ const LikeFormEditor = () => {
                             })
                     }
                     )}} className="btn btn-success">Create</button>
+            <br/>
+            <Link to={`/articles/${like.article.id}`}>Get Article</Link>
+            <br/>
+            <Link to={`/users/${like.user.id}`}>Get User</Link>
         </div>
     )
 }

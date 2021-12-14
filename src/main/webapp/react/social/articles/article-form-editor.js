@@ -74,6 +74,8 @@ const ArticleFormEditor = () => {
             <Link to={`/comments/article/${article.id}`}>Get Comments on Article</Link>
             <br/>
             <Link to={`/likes/article/${article.id}`}>Get Likes on Article</Link>
+            <br/>
+            <Link to={`/users/${article.createdUser.id}`}>Get User</Link>
         </div>
     )
 }
